@@ -99,5 +99,16 @@ router.get('/partners', async (req, res) => {
     }
 });
 
+// get a particular partner
+router.get('/partners/:id', async (req, res) => {
+    try {
+        const partner = await Partner.findById(req.params.id);
+        return res.json(partner);
+        
+    } catch (error) {
+        return res.json({errorMessage: error});
+    }
+});
+
 
 module.exports = router;
