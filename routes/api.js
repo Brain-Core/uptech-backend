@@ -110,5 +110,21 @@ router.get('/partners/:id', async (req, res) => {
     }
 });
 
+// update a partner
+router.put('/partners', upload.single('logo'), async (req, res) => {
+    try {
+        const newPartnerData = {
+            name: req.name,
+            logo: req.file.path
+        };
+
+        const partnerUpdated = Partner.findByIdAndUpdate({_id:req.params.id}, newPartnerData, {new: true});
+        return res.json(partnerUpdated);
+        
+    } catch (error) {
+        return res.json({errorMessage: error});
+    }
+});
+
 
 module.exports = router;
