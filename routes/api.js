@@ -52,4 +52,22 @@ router.get('/products/:id', async (req, res) => {
     }
 });
 
+// update a product
+router.put('/products', upload.single('photo'), async (req, res) => {
+    try {
+        const newProductData = {
+            name: req.name,
+            photo: req.file.path
+        };
+
+        const productUpdated = Product.findByIdAndUpdate({_id:req.params.id}, newProductData, {new: true});
+        return res.json(productUpdated);
+        
+    } catch (error) {
+        return res.json({errorMessage: error});
+    }
+});
+
+
+
 module.exports = router;
