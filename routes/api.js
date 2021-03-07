@@ -3,10 +3,32 @@ const Product = require('../models/product.model');
 const Impact = require('../models/impact.model');
 const Partner = require('../models/partner.model');
 const Team = require('../models/team.model');
+const { upload } = require('../helper/helper');
+
+//  ############ API TEST ###################
 
 // test routes
 router.get('/testAPI', (req, res) => {
     res.json('UP-Tech API works perfectly ...')
 });
+
+//  ############ PRODUCTS ###################
+
+// save a product
+router.post('/products', upload.single('photo'), async (req, res) => {
+    try {
+        const newProduct = new Product({
+            name: req.name,
+            photo: req.file.path
+        });
+
+        const saveProduct = await newProduct.save();
+        return res.json(saveProduct);
+        
+    } catch (error) {
+        return res.json({errorMessage: error});
+    }
+});
+
 
 module.exports = router;
