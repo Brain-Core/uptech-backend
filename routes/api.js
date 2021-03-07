@@ -69,5 +69,23 @@ router.put('/products', upload.single('photo'), async (req, res) => {
 });
 
 
+//  ############ PARTNERS ###################
+
+// save a partner
+router.post('/partners', upload.single('logo'), async (req, res) => {
+    try {
+        const newPartner = new Partner({
+            name: req.name,
+            logo: req.file.path
+        });
+
+        const savePartner = await newPartner.save();
+        return res.json(savepartner);
+        
+    } catch (error) {
+        return res.json({errorMessage: error});
+    }
+});
+
 
 module.exports = router;
