@@ -88,4 +88,16 @@ router.post('/partners', upload.single('logo'), async (req, res) => {
 });
 
 
+// get partners
+router.get('/partners', async (req, res) => {
+    try {
+        const partners = await Partner.find();
+        return res.json(partners);
+        
+    } catch (error) {
+        return res.json({errorMessage: error});
+    }
+});
+
+
 module.exports = router;
