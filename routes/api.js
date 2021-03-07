@@ -145,4 +145,15 @@ router.post('/impacts', upload.single('photo'), async (req, res) => {
     }
 });
 
+// get impacts
+router.get('/impacts', async (req, res) => {
+    try {
+        const impacts = await Impact.find();
+        return res.json(impacts);
+        
+    } catch (error) {
+        return res.json({errorMessage: error});
+    }
+});
+
 module.exports = router;
