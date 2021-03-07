@@ -127,4 +127,22 @@ router.put('/partners', upload.single('logo'), async (req, res) => {
 });
 
 
+//  ############ IMPACTS ###################
+
+// save a impact
+router.post('/impacts', upload.single('photo'), async (req, res) => {
+    try {
+        const newImpact = new impact({
+            name: req.name,
+            photo: req.file.path
+        });
+
+        const saveImpact = await newImpact.save();
+        return res.json(saveImpact);
+        
+    } catch (error) {
+        return res.json({errorMessage: error});
+    }
+});
+
 module.exports = router;
