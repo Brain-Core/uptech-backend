@@ -41,6 +41,15 @@ router.get('/products', async (req, res) => {
     }
 });
 
-
+// get a particular product
+router.get('/products/:id', async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        return res.json(product);
+        
+    } catch (error) {
+        return res.json({errorMessage: error});
+    }
+});
 
 module.exports = router;
