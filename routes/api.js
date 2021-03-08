@@ -69,7 +69,6 @@ router.put('/products', upload.single('photo'), async (req, res) => {
     }
 });
 
-
 //  ############ PARTNERS ###################
 
 // save a partner
@@ -81,7 +80,7 @@ router.post('/partners', upload.single('logo'), async (req, res) => {
         });
 
         const savePartner = await newPartner.save();
-        return res.json(savepartner);
+        return res.json(savePartner);
         
     } catch (error) {
         return res.json({errorMessage: error});
@@ -127,7 +126,6 @@ router.put('/partners', upload.single('logo'), async (req, res) => {
     }
 });
 
-
 //  ############ IMPACTS ###################
 
 // save a impact
@@ -170,7 +168,7 @@ router.get('/impacts/:id', async (req, res) => {
 });
 
 // update a impact
-router.put('/impacts', upload.single('photo'), async (req, res) => {
+router.put('/impacts/:id', upload.single('photo'), async (req, res) => {
     try {
         const newImpactData = {
             title: req.title,
@@ -219,6 +217,25 @@ router.put('/about/:id', async (req, res) => {
 
         const aboutUpdated = About.findByIdAndUpdate({_id:req.params.id}, newAboutData, {new: true});
         return res.json(aboutUpdated);
+        
+    } catch (error) {
+        return res.json({errorMessage: error});
+    }
+});
+
+//  ############ TEAM ###################
+
+// save a team member
+router.post('/team', upload.single('photo'), async (req, res) => {
+    try {
+        const newTeam = new Team({
+            completeName: req.completeName,
+            position: req.position,
+            photo: req.file.path
+        });
+
+        const saveTeam = await newTeam.save();
+        return res.json(saveTeam);
         
     } catch (error) {
         return res.json({errorMessage: error});
