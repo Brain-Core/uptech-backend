@@ -201,4 +201,15 @@ router.post('/about', upload.single('photo'), async (req, res) => {
     }
 });
 
+// get the about
+router.get('/about/:id', async (req, res) => {
+    try {
+        const about = await About.findById(req.params.id);
+        return res.json(about);
+        
+    } catch (error) {
+        return res.json({errorMessage: error});
+    }
+});
+
 module.exports = router;
