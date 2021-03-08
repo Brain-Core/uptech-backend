@@ -253,4 +253,15 @@ router.get('/team', async (req, res) => {
     }
 });
 
+// get a particular team member
+router.get('/team/:id', async (req, res) => {
+    try {
+        const team = await Team.findById(req.params.id);
+        return res.json(team);
+        
+    } catch (error) {
+        return res.json({errorMessage: error});
+    }
+});
+
 module.exports = router;
