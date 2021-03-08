@@ -212,4 +212,17 @@ router.get('/about/:id', async (req, res) => {
     }
 });
 
+// update the about
+router.put('/about/:id', async (req, res) => {
+    try {
+        const newAboutData = {text: req.text};
+
+        const aboutUpdated = About.findByIdAndUpdate({_id:req.params.id}, newAboutData, {new: true});
+        return res.json(aboutUpdated);
+        
+    } catch (error) {
+        return res.json({errorMessage: error});
+    }
+});
+
 module.exports = router;
