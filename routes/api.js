@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Product = require('../models/product.model');
 const Impact = require('../models/impact.model');
 const Partner = require('../models/partner.model');
+const About = require('../models/about.model');
 const Team = require('../models/team.model');
 const { upload } = require('../helper/helper');
 
@@ -179,6 +180,21 @@ router.put('/impacts', upload.single('photo'), async (req, res) => {
 
         const impactUpdated = Impact.findByIdAndUpdate({_id:req.params.id}, newImpactData, {new: true});
         return res.json(impactUpdated);
+        
+    } catch (error) {
+        return res.json({errorMessage: error});
+    }
+});
+
+//  ############ ABOUT ###################
+
+// save the about
+router.post('/about', upload.single('photo'), async (req, res) => {
+    try {
+        const newAbout = new about({text: req.text});
+
+        const saveAbout = await newAbout.save();
+        return res.json(saveAbout);
         
     } catch (error) {
         return res.json({errorMessage: error});
