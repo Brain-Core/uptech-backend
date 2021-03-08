@@ -264,4 +264,21 @@ router.get('/team/:id', async (req, res) => {
     }
 });
 
+// update a team member info
+router.put('/team', upload.single('photo'), async (req, res) => {
+    try {
+        const newTeamMemberData = {
+            completeName: req.completeName,
+            position: req.position,
+            photo: req.file.path
+        };
+
+        const teamMemberUpdated = Team.findByIdAndUpdate({_id:req.params.id}, newTeamMemberData, {new: true});
+        return res.json(teamMemberUpdated);
+        
+    } catch (error) {
+        return res.json({errorMessage: error});
+    }
+});
+
 module.exports = router;
