@@ -242,4 +242,15 @@ router.post('/team', upload.single('photo'), async (req, res) => {
     }
 });
 
+// get team members
+router.get('/team', async (req, res) => {
+    try {
+        const teams = await Team.find();
+        return res.json(teams);
+        
+    } catch (error) {
+        return res.json({errorMessage: error});
+    }
+});
+
 module.exports = router;
