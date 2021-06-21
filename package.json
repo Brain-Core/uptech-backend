@@ -4,8 +4,8 @@
   "description": "up-tech backend stuff",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js --exec babel-node -e js",
-    "dev": "nodemon app.js --exec babel-node -e js"
+    "start": "node source/app.js --exec babel-node -e js",
+    "dev": "nodemon source/app.js --exec babel-node -e js"
   },
   "keywords": [
     "es6",
