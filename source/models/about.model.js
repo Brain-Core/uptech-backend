@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from '../helper/dbconnect';
 
 const AboutSchema = mongoose.Schema({
     text: {
@@ -7,4 +7,4 @@ const AboutSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('impacts', AboutSchema);
+export default mongoose.model('impacts', AboutSchema);
