@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import config from 'config';
 
-const db = mongoose.connect(config.get('uri'),{
+mongoose.connect(config.get('uri'),{
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true
@@ -9,4 +9,4 @@ const db = mongoose.connect(config.get('uri'),{
 .catch(err => console.log(err));
 
 
-export default db;
+export default mongoose;
