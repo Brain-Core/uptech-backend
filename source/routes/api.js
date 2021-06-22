@@ -17,60 +17,6 @@ router.get('/testAPI', (req, res) => {
 //  ############ IMPACTS ###################
 
 // save a impact
-router.post('/impacts', upload.single('photo'), async (req, res) => {
-    try {
-        const newImpact = new impact({
-            title: req.title,
-            description: req.description,
-            photo: req.file.path
-        });
-
-        const saveImpact = await newImpact.save();
-        return res.json(saveImpact);
-        
-    } catch (error) {
-        return res.json({errorMessage: error});
-    }
-});
-
-// get impacts
-router.get('/impacts', async (req, res) => {
-    try {
-        const impacts = await Impact.find();
-        return res.json(impacts);
-        
-    } catch (error) {
-        return res.json({errorMessage: error});
-    }
-});
-
-// get a particular impact
-router.get('/impacts/:id', async (req, res) => {
-    try {
-        const impact = await Impact.findById(req.params.id);
-        return res.json(impact);
-        
-    } catch (error) {
-        return res.json({errorMessage: error});
-    }
-});
-
-// update a impact
-router.put('/impacts/:id', upload.single('photo'), async (req, res) => {
-    try {
-        const newImpactData = {
-            title: req.title,
-            description: req.description,
-            photo: req.file.path
-        };
-
-        const impactUpdated = Impact.findByIdAndUpdate({_id:req.params.id}, newImpactData, {new: true});
-        return res.json(impactUpdated);
-        
-    } catch (error) {
-        return res.json({errorMessage: error});
-    }
-});
 
 //  ############ ABOUT ###################
 
