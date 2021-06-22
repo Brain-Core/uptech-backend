@@ -4,16 +4,27 @@ import Product from '../models/product.model';
 // ###### insert product in the database controller
 
 async function insertProduct(req, res){
-   
+   const { name } = req.body;
     try {
-        let str = req.file.path
-        const newProduct = new Product({
-            name: req.body.name,
-            photo: str.substring(68)
-        });
-
-        const saveProduct = await newProduct.save();
-        return res.json(saveProduct);
+        await Product.findOne({name})
+        .then(product =>{
+            if(product) {
+                return res.json({msg: 'product already exists !!!!!'})
+            }else{
+                let str = req.file.path
+                let newProduct = new Product({
+                    name: name,
+                    photo: str.substring(68)
+                });
+        
+                newProduct.save()
+                .then(product=> {
+                    res.json(product)
+                });
+                
+            }
+        }
+        )
         
     } catch (error) {
         return res.json({errorMessage: error});

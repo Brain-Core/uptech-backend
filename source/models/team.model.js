@@ -21,7 +21,7 @@ const TeamSchema = mongoose.Schema({
         type: String, 
         required: true
     },
-    photo:{
+    avatar:{
         type: String,
         required: true
     }

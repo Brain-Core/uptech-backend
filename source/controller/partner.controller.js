@@ -2,14 +2,24 @@ import  Partner from '../models/partner.model';
 
 // """""""""" insert partners """"""""""""""
 const insertPartners = async (req, res) => {
+    let { name } = req.body;
         try {
-            const newPartner = new Partner({
-                name: req.name,
-                logo: req.file.path
-            });
-    
-            const savePartner = await newPartner.save();
-            return res.json(savePartner);
+            await Partner.findOne({name})
+            .then(partner =>{
+                if(partner) {
+                    return res.json({msg: 'partner already exists'})
+                }
+                else{
+                    const newPartner = new Partner({
+                        name: name,
+                        logo: req.file.path
+                    });
+            
+                    const savePartner = newPartner.save();
+                    return res.json(savePartner);
+                }
+            })
+           
             
         } catch (error) {
             return res.json({errorMessage: error});
