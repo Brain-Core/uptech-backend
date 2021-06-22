@@ -4,11 +4,12 @@ import Product from '../models/product.model';
 // ###### insert product in the database controller
 
 async function insertProduct(req, res){
-    
+   
     try {
+        let str = req.file.path
         const newProduct = new Product({
-            name: req.name,
-            photo: req.file.path
+            name: req.body.name,
+            photo: str.substring(68)
         });
 
         const saveProduct = await newProduct.save();
