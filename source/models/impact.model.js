@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from '../helper/dbconnect';
 
 const ImpactSchema = mongoose.Schema({
     title: {
@@ -15,4 +15,4 @@ const ImpactSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('impacts', ImpactSchema);
+export default mongoose.model('impacts', ImpactSchema);

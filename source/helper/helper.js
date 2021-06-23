@@ -1,19 +1,20 @@
-const multer = require('multer');
-const path = require('path');
+import  multer from 'multer';
+import path from 'path';
 
 // storage
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        return cb(null, path.join('..','uploads'));
+        return cb(null, path.join(__dirname, '../upload/'));
     },
     filename: (req, file, cb) => {
-        return cb(null, `${file.fieldname}_${Date.now()}_${file.originalname}`);
+        let ext = path.extname(file.originalname);
+        return cb(null, Date.now() + ext);
     }
 });
 
 // filter
 const fileFilter = (req, file, cb) => {
-    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
+    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg'){
         return cb(null, true);
     }else{
         return cb(null, false);
@@ -22,9 +23,9 @@ const fileFilter = (req, file, cb) => {
 
 // upload
 const upload = multer({
-    storage: storage,
-    fileFilter: fileFilter
+    storage,
+    fileFilter
 });
 
 
-module.exports = { upload };
+export  { upload };

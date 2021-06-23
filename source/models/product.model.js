@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from '../helper/dbconnect';
 
 const ProductSchema = mongoose.Schema({
     name: {
@@ -11,4 +11,4 @@ const ProductSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('products', ProductSchema);
+export default mongoose.model('products', ProductSchema);
