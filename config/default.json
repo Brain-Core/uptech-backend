@@ -1,4 +1,4 @@
 {
     "uri": "mongodb://127.0.0.1:27017/uptechdb",
-    "secret-key": "uptechjoseph"
+    "secret-key": "uptech_secret_key"
 }
