@@ -1,0 +1,222 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "UpTech Backend API",
+        "description": "Implement all the CRUD functionnalities of Endpoint"
+    },
+    "servers": [
+        {
+            "url":"http://localhost:3030",
+            "description": "Local Dev"
+        }
+    ],
+    "host":"http://localhost:3030",
+    "basePath":"",
+    "tags": [
+        {
+            "name":"teams"
+        },
+        {
+            "name":"impacts"
+        }
+    ],
+    "schemes":[
+        "http",
+        "https"
+    ],
+    "consumes":[
+        "application/json"
+    ],
+    "produces":[
+        "application/json"
+    ],
+    "paths": {
+        "/teams":{
+            "get":{
+                "tags":[
+                    "teams"
+                ],
+                "summary": "Get all Item",
+                "responses": {
+                    "200":{
+                        "description": "OK",
+                        "schema":{
+                            "$ref":"#/definitions/teams"
+                        }
+                    }
+                }
+            }
+        },
+        "/teams/{id}":{
+            "parameters": [
+                {
+                    "name":"id",
+                    "in": "path",
+                    "required": true,
+                    "description": "id for team member",
+                    "schema":{
+                        "$ref":"#/definitions/teams"
+                    }
+                }
+            ],
+            "get":{
+                "tags": [
+                    "teams"
+                ],
+                "summary": "Get one team by his id",
+                "responses": {
+                    "200":{
+                        "description": "OK",
+                        "schema":{
+                            "#ref":"#/definitions/teams"
+                        }
+                    },
+                    "400":{
+                        "description": "User ID does not exists"
+                    }
+                }
+            }
+        },
+        "/teams/post":{
+            "post":{
+                "tags": ["teams"],
+                "description": "Add new team Member",
+                "parameters": [
+                    {
+                        "name": "team",
+                        "in": "body",
+                        "description": "Team Member that we want to add",
+                        "schema":{
+                            "$ref":"#/definitions/teams"
+                        }
+                    }
+                ],
+                "summary": "Register new team member",
+                "responses": {
+                    "200":{
+                        "description": "OK",
+                        "schema":{
+                            "#ref":"#/definitions/teams"
+                        }
+                    }
+                }
+            }
+        },
+        "/teams/edit/{id}":{
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "The id of the member that you'd like to Edit",
+                    "schema":{
+                        "$ref":"#/definitions/teams"
+                    },
+                    "required": true
+                },
+                {
+                    "name": "team",
+                    "in": "body",
+                    "description": "Team member's new informations",
+                    "schema":{
+                        "$ref":"#/definitions/teams"
+                    },
+                    "required": false
+                }
+
+            ],
+            "put":{
+                "tags": ["teams"],
+                "summary": "Edit an existing team's information",
+                "responses": {
+                    "200":{
+                        "description": "OK",
+                        "schema":{
+                            "#ref":"#/definitions/teams"
+                        }
+                    },
+                    "400":{
+                        "description": "Team ID does not exists"
+                    }
+                }
+            }
+        },
+        "/teams/delete/{id}":{
+            "parameters": [
+                {
+                    "name":"id",
+                    "in": "path",
+                    "required": true,
+                    "description": "id for team member",
+                    "schema":{
+                        "$ref":"#/definitions/teams"
+                    }
+                }
+            ],
+            "delete":{
+                "tags": ["teams"],
+                "summary": "delete one team by his id",
+                "responses": {
+                    "200":{
+                        "description": "OK",
+                        "schema":{
+                            "#ref":"#/definitions/teams"
+                        }
+                    },
+                    "400":{
+                        "description": "User ID does not exists"
+                    }
+                }
+            }
+          
+        },
+        "/products":{
+            "get":{
+                "tags": ["products"],
+                "summary": "Get all products",
+                "responses": {
+                    
+                }
+            }
+        }
+    },
+    "definitions":{
+        "teams":{
+            "types":"object",
+            "properties":{
+                "completeName":{
+                    "type":"string"
+                },
+                "address":{
+                    "type":"string"
+                },
+                "email":{
+                    "type":"string"
+                },
+                "phone":{
+                    "type":"string"
+                },
+                "position":{
+                    "type":"string"
+                },
+                "avatar":{
+                    "type":"string"
+                }
+            }
+            
+        },
+        "product":{
+            "types":"object",
+            "properties":{
+                "title":{
+                    "type":"string"
+                },
+                "photo":{
+                    "type":"string"
+                }
+            }
+            
+        }
+    }
+
+}

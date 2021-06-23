@@ -1,11 +1,15 @@
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
+
 import productRoute from './routes/product.route';
 import partnersRoute from './routes/partner.route';
 import teamRoute from './routes/team.route';
 import path from 'path';
 import impactRoute from './routes/impact.route';
-
+import swaggerDoc from '../swagger.json';
 const app = express();
+
+
 
 // static file
 app.use('/upload',express.static(path.join(__dirname,'upload')))
@@ -22,6 +26,9 @@ app.use('/teams',teamRoute)
 
 //impacts
 app.use('/impact', impactRoute)
+
+// docs 
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 const port = process.env.PORT || 3030;
 app.listen(port, () => console.log(`UP-Tech backend listening on ${port}`));
