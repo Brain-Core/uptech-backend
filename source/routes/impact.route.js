@@ -10,7 +10,7 @@ route.get('/', impactController.getImpact);
 
 // get one partner 
 // request: /impact/:id
-route.post('/:id',impactController.getOneImpact);
+route.get('/:id',impactController.getOneImpact);
 
 // insert one partner 
 // request: /impact/post

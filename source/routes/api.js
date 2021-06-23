@@ -1,9 +1,7 @@
 const router = require('express').Router();
 
-const Impact = require('../models/impact.model');
-
 const About = require('../models/about.model');
-const Team = require('../models/team.model');
+
 const { upload } = require('../helper/helper');
 
 //  ############ API TEST ###################
@@ -13,10 +11,6 @@ router.get('/testAPI', (req, res) => {
     res.json('UP-Tech API works perfectly ...')
 });
 
-
-//  ############ IMPACTS ###################
-
-// save a impact
 
 //  ############ ABOUT ###################
 
@@ -59,60 +53,6 @@ router.put('/about/:id', async (req, res) => {
 
 //  ############ TEAM ###################
 
-// save a team member
-router.post('/team', upload.single('photo'), async (req, res) => {
-    try {
-        const newTeam = new Team({
-            completeName: req.completeName,
-            position: req.position,
-            photo: req.file.path
-        });
 
-        const saveTeam = await newTeam.save();
-        return res.json(saveTeam);
-        
-    } catch (error) {
-        return res.json({errorMessage: error});
-    }
-});
-
-// get team members
-router.get('/team', async (req, res) => {
-    try {
-        const teams = await Team.find();
-        return res.json(teams);
-        
-    } catch (error) {
-        return res.json({errorMessage: error});
-    }
-});
-
-// get a particular team member
-router.get('/team/:id', async (req, res) => {
-    try {
-        const team = await Team.findById(req.params.id);
-        return res.json(team);
-        
-    } catch (error) {
-        return res.json({errorMessage: error});
-    }
-});
-
-// update a team member info
-router.put('/team', upload.single('photo'), async (req, res) => {
-    try {
-        const newTeamMemberData = {
-            completeName: req.completeName,
-            position: req.position,
-            photo: req.file.path
-        };
-
-        const teamMemberUpdated = Team.findByIdAndUpdate({_id:req.params.id}, newTeamMemberData, {new: true});
-        return res.json(teamMemberUpdated);
-        
-    } catch (error) {
-        return res.json({errorMessage: error});
-    }
-});
 
 module.exports = router;

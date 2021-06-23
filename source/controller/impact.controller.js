@@ -3,35 +3,26 @@ import impactModel from "../models/impact.model";
 
 // get impacts
 const getImpact = (req, res) => {
-    try {
-        const impacts = impactModel.find();
-        return res.json(impacts);
-        
-    } catch (error) {
-        return res.json({errorMessage: error});
-    }
+   impactModel.find()
+   .then(impacts => res.json(impacts))
+   .catch(err=> res.json({errorMessage: error}));
 }
 
 // get a particular impact
 const getOneImpact = (req, res) => {
-    try {
-        const impact =  impactModel.findById(req.params.id);
-        return res.json(impact);
-        
-    } catch (error) {
-        return res.json({errorMessage: error});
-    }
+    impactModel.findById(req.params.id)
+    .then(impacts => res.json(impacts))
+    .catch(err=> res.json({errorMessage: error}));
 }
 
 
-const insertImpact = async (req, res) => {
+const insertImpact = (req, res) => {
     const { title , description } = req.body;
     const p = req.file.path;
     const photo = p.substring(68);
-    try {
-        if(!title || !description || !photo) return res.status(501).json({Warning: 'please fill all fields !!'});
+    if(!title || !description || !photo) return res.status(501).json({Warning: 'please fill all fields !!'});
 
-        await impactModel.findOne({title})
+        impactModel.findOne({title})
         .then(impact => {
             if(impact){
                 return res.status(501).json({Warning: 'impact already exists'});
@@ -48,9 +39,6 @@ const insertImpact = async (req, res) => {
             }
         })
         
-    } catch (error) {
-        return res.json({errorMessage: error});
-    }
 }
 
 
