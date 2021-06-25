@@ -19,6 +19,9 @@
         },
         {
             "name":"impacts"
+        },
+        {
+            "name": "products"
         }
     ],
     "schemes":[
@@ -113,20 +116,21 @@
                         "$ref":"#/definitions/teams"
                     },
                     "required": true
-                },
-                {
-                    "name": "team",
-                    "in": "body",
-                    "description": "Team member's new informations",
-                    "schema":{
-                        "$ref":"#/definitions/teams"
-                    },
-                    "required": false
                 }
-
             ],
             "put":{
                 "tags": ["teams"],
+                "parameters":[
+                    {
+                        "name": "team",
+                        "in": "body",
+                        "description": "Team member's new informations",
+                        "schema":{
+                            "$ref":"#/definitions/teams"
+                        },
+                        "required": false
+                    }
+                ],
                 "summary": "Edit an existing team's information",
                 "responses": {
                     "200":{
@@ -160,7 +164,7 @@
                     "200":{
                         "description": "OK",
                         "schema":{
-                            "#ref":"#/definitions/teams"
+                            "$ref":"#/definitions/teams"
                         }
                     },
                     "400":{
@@ -175,10 +179,95 @@
                 "tags": ["products"],
                 "summary": "Get all products",
                 "responses": {
-                    
+                    "200":{
+                        "description": "OK"
+                    },
+                    "schema":{
+                        "$ref":"#/definitions/products"
+                    }
+
                 }
             }
-        }
+        },
+        "/products/{id}":{
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id of product",
+                    "type":"string",
+                    "required": true
+                }
+            ],
+            "get":{
+                "tags": ["products"],
+                "summary": "List a single product",
+                "responses": {
+                    "200":{
+                        "description": "OK"
+                    },
+                    "schema":{
+                        "$ref":"#/definitions/products"
+                    }
+                }
+            }
+        },
+        "/products/post":{
+            "post":{
+                "parameters": [
+                    {
+                        "name":"products",
+                        "in": "body",
+                        "description":"products informations",
+                        "schema":{
+                            "$ref":"#/definitions/products"
+                        },
+                        "required": true
+                    }
+                ],
+                "summary": "Add product in our Server",
+                "tags": ["products"],
+                "responses": {
+                    "200":{
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/products/edit/{id}":{
+            "parameters": [
+                {
+                    "name":"id",
+                    "in": "path",
+                    "description": "The id of the user we wqnt to add",
+                    "schema":{
+                        "$ref":"#/definitions/products"
+                    },
+                    "required": true
+                }
+            ],
+            "put":{
+                "parameters": [
+                    {
+                        "name": "products",
+                        "in": "body",
+                        "description": "data we want to edit",
+                        "schema":{
+                            "$ref":"#/definitions/products"
+                        },
+                        "required": false
+                    }
+                ],
+                "tags": ["products"],
+                "summary": "Edit products",
+                "responses": {
+                    "200":{
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/products/delete/{id}":{}
     },
     "definitions":{
         "teams":{
@@ -205,7 +294,7 @@
             }
             
         },
-        "product":{
+        "products":{
             "types":"object",
             "properties":{
                 "title":{
