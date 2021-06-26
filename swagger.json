@@ -3,7 +3,7 @@
     "info": {
         "version": "1.0.0",
         "title": "UpTech Backend API",
-        "description": "Implement all the CRUD functionnalities of Endpoint"
+        "description": "Implement all the CRUD functionnalities of each Endpoint"
     },
     "servers": [
         {
@@ -18,10 +18,13 @@
             "name":"teams"
         },
         {
-            "name":"impacts"
+            "name":"Impacts"
         },
         {
             "name": "products"
+        },
+        {
+            "name": "Partners"
         }
     ],
     "schemes":[
@@ -174,6 +177,9 @@
             }
           
         },
+
+
+        
         "/products":{
             "get":{
                 "tags": ["products"],
@@ -196,6 +202,9 @@
                     "in": "path",
                     "description": "Id of product",
                     "type":"string",
+                    "schema":{
+                        "$ref":"#/definitions/products"
+                    },
                     "required": true
                 }
             ],
@@ -267,7 +276,276 @@
                 }
             }
         },
-        "/products/delete/{id}":{}
+        "/products/delete/{id}":{
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id of product",
+                    "type":"string",
+                    "schema":{
+                        "$ref":"#/definitions/products"
+                    },
+                    "required": true
+                }
+            ],
+            "delete":{
+                "tags": ["products"],
+                "summary": "Delete a single product",
+                "responses": {
+                    "200":{
+                        "description": "OK"
+                    },
+                    "schema":{
+                        "$ref":"#/definitions/products"
+                    }
+                }
+            }
+        },
+        "/impacts":{
+            "get":{
+                "tags": ["Impacts"],
+                "summary": "Get all impacts ",
+                "responses": {
+                    "200":{
+                        "description": "OK"
+                    },
+                    "schema":{
+                        "$ref":"#/definitions/impacts"
+                    }
+
+                }
+            }
+        },
+        "/impacts/{id}":{
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id of impacts",
+                    "type":"string",
+                    "schema":{
+                        "$ref":"#/definitions/impacts"
+                    },
+                    "required": true
+                }
+            ],
+            "get":{
+                "tags": ["Impacts"],
+                "summary": "List a single impacts",
+                "responses": {
+                    "200":{
+                        "description": "OK"
+                    },
+                    "schema":{
+                        "$ref":"#/definitions/impacts"
+                    }
+                }
+            }
+        },
+        "/impacts/post":{
+            "post":{
+                "parameters": [
+                    {
+                        "name": "impacts",
+                        "in": "body",
+                        "description": "data we want to edit",
+                        "schema":{
+                            "$ref":"#/definitions/impacts"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": ["Impacts"],
+                "summary": "Add new impacts",
+                "responses": {
+                    "200":{
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/impacts/edit/{id}":{
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "id of what we want to edit",
+                    "schema":{
+                        "$ref":"#/definitions/impacts"
+                    },
+                    "required": true
+                }
+            ],
+            "put":{
+                "parameters": [
+                    {
+                        "name": "impacts",
+                        "in": "body",
+                        "description": "data we want to edit",
+                        "schema":{
+                            "$ref":"#/definitions/impacts"
+                        },
+                        "required": false
+                    }
+                ],
+                "tags": ["Impacts"],
+                "summary": "Edit impacts",
+                "responses": {
+                    "200":{
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/impacts/delete/{id}":{
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id of impacts",
+                    "type":"string",
+                    "schema":{
+                        "$ref":"#/definitions/impacts"
+                    },
+                    "required": true
+                }
+            ],
+            "delete":{
+                "tags": ["Impacts"],
+                "summary": "Delete a single impacts",
+                "responses": {
+                    "200":{
+                        "description": "OK"
+                    },
+                    "schema":{
+                        "$ref":"#/definitions/impacts"
+                    }
+                }
+            }
+        },
+        "/partners":{
+            "get":{
+                "tags": ["Partners"],
+                "summary": "Get all partners ",
+                "responses": {
+                    "200":{
+                        "description": "OK"
+                    },
+                    "schema":{
+                        "$ref":"#/definitions/partners"
+                    }
+
+                }
+            }
+        },
+        "/partners/{id}":{
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id of partners",
+                    "type":"string",
+                    "schema":{
+                        "$ref":"#/definitions/partners"
+                    },
+                    "required": true
+                }
+            ],
+            "get":{
+                "tags": ["Partners"],
+                "summary": "List a single partners",
+                "responses": {
+                    "200":{
+                        "description": "OK"
+                    },
+                    "schema":{
+                        "$ref":"#/definitions/impacts"
+                    }
+                }
+            }
+        },
+        "/partners/post":{
+            "post":{
+                "parameters": [
+                    {
+                        "name": "partners",
+                        "in": "body",
+                        "description": "data we want to edit",
+                        "schema":{
+                            "$ref":"#/definitions/partners"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": ["Partners"],
+                "summary": "Add new partners",
+                "responses": {
+                    "200":{
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/partners/edit/{id}":{
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "id of what we want to edit",
+                    "schema":{
+                        "$ref":"#/definitions/partners"
+                    },
+                    "required": true
+                }
+            ],
+            "put":{
+                "parameters": [
+                    {
+                        "name": "partners",
+                        "in": "body",
+                        "description": "data we want to edit",
+                        "schema":{
+                            "$ref":"#/definitions/partners"
+                        },
+                        "required": false
+                    }
+                ],
+                "tags": ["Partners"],
+                "summary": "Edit impacts",
+                "responses": {
+                    "200":{
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/partners/delete/{id}":{
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id of partners",
+                    "type":"string",
+                    "schema":{
+                        "$ref":"#/definitions/partners"
+                    },
+                    "required": true
+                }
+            ],
+            "delete":{
+                "tags": ["Partners"],
+                "summary": "Delete a single partners",
+                "responses": {
+                    "200":{
+                        "description": "OK"
+                    },
+                    "schema":{
+                        "$ref":"#/definitions/partners"
+                    }
+                }
+            }
+        }
     },
     "definitions":{
         "teams":{
@@ -305,6 +583,31 @@
                 }
             }
             
+        },
+        "impacts":{
+            "types":"object",
+            "properties":{
+                "title":{
+                    "type":"string"
+                },
+                "description":{
+                    "type":"string"
+                },
+                "photo":{
+                    "type":"string"
+                }
+            }
+        },
+        "partners":{
+            "types":"object",
+            "properties":{
+                "name":{
+                    "type":"string"
+                },
+                "logo":{
+                    "type":"string"
+                }
+            }
         }
     }
 
