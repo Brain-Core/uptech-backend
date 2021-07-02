@@ -7,10 +7,12 @@ import teamRoute from './routes/team.route';
 import path from 'path';
 import impactRoute from './routes/impact.route';
 import swaggerDoc from '../swagger.json';
+import cors from 'cors';
 const app = express();
 
 
-
+app.use(cors())
+app.use(express.json());
 // static file
 app.use('/upload',express.static(path.join(__dirname,'upload')))
 
