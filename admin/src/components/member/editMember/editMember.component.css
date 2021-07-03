@@ -1,0 +1,143 @@
+.editMember{
+    flex: 4;
+    padding: 20px;
+}
+
+.editMember__container_title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+
+.editMember__container{
+    display: flex;
+}
+
+.editMember__showCase{
+    flex:1;
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75) !important;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75) !important;
+
+}
+
+.editMember__form{
+    flex: 2;
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75) !important;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75) !important;
+    margin-left: 20px;
+}
+
+.editMember__showCaseTop{
+    display: flex;
+    align-items: center;
+}
+
+
+.editMember__showCaseImg{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 10px;
+}
+
+.editMember__showCaseTop__title{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.editMember__showCase__Fullname{
+    font-weight: 600;
+}
+
+
+.editMember__showCase_age{
+    font-weight: 300;
+}
+
+
+.editMember__showCaseBottom{
+    margin-top: 20px;
+    padding: 20px;
+}
+
+
+
+.editMember__showCaseBottom__title{
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(77, 77, 77);
+}
+
+.editMember__showCaseBottomInfo{
+    display: flex;
+    align-items: center;
+    margin: 20px 0px;
+    color: #444;
+}
+
+
+.editMember__showCaseBottomInfo__title{
+    margin-left: 10px;
+
+}
+
+.editMember__showCaseBottom__icon{
+    font-size: 16px !important;
+}
+
+/* edit form side */
+
+
+.editMember__form{
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form{
+    margin-top: 20px;
+}
+
+.editMember__formTitle{
+    font-weight: 600;
+}
+
+.editMember__formProfile{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.editMember__formProfile_picture{
+    display: flex;
+    align-items: center;
+}
+
+.editMember__formImage{
+    width: 100px;
+    height: 100px;
+    border-radius: 10%;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+
+.form-control{
+    border: none !important;
+    border-bottom: 1px solid gray !important;
+}
+
+.editMember__form_icon{
+    color: rgb(10, 78, 21) !important;
+    cursor: pointer;
+}
+
+
+
+
+
