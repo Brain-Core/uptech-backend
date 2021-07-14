@@ -1,13 +1,16 @@
 import mongoose from '../helper/dbconnect';
 
 const ProductSchema = mongoose.Schema({
-    name: {
+    namep: {
         type: String, 
         required: true
     },
     photo:{
         type: String,
         required: true
+    },
+    cloudinary_id: {
+        type: String,
     }
 });
 

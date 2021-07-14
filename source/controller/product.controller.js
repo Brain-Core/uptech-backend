@@ -1,20 +1,25 @@
 import Product from '../models/product.model';
+import cloudinary from '../helper/cloudinary';
 
 
 // ###### insert product in the database controller
 
 async function insertProduct(req, res){
-   const { name } = req.body;
-    try {
-        await Product.findOne({name})
+   const  namep  = req.body.namep;
+   const image = req.file.path 
+
+    let result = await cloudinary.uploader.upload(image)
+   
+     Product.findOne({namep})
         .then(product =>{
             if(product) {
                 return res.json({msg: 'product already exists !!!!!'})
             }else{
-                let str = req.file.path
+                
                 let newProduct = new Product({
-                    name: name,
-                    photo: str.substring(68)
+                    namep: namep,
+                    photo: result.secure_url,
+                    cloudinary_id: result.public_id
                 });
         
                 newProduct.save()
@@ -25,10 +30,7 @@ async function insertProduct(req, res){
             }
         }
         )
-        
-    } catch (error) {
-        return res.json({errorMessage: error});
-    }
+        .catch(err=> res.json({err}));
 }
 
 
@@ -61,10 +63,11 @@ const getOneProduct = async (req, res) => {
 // ############## edit one single product by its id #######
 
 const updateProduct = async (req, res) => {
+    let result = await cloudinary.uploader.upload(req.file.path)
     try {
         const newProductData = {
             name: req.name,
-            photo: req.file.path
+            photo: result.secure_url
         };
 
         const productUpdated = await Product.findByIdAndUpdate(
