@@ -12,6 +12,9 @@ const ImpactSchema = mongoose.Schema({
     photo:{
         type: String,
         required: true
+    },
+    cloud_id:{
+        type: String
     }
 });
 

@@ -1,8 +1,10 @@
 import  Partner from '../models/partner.model';
+import cloudinary from '../helper/cloudinary';
 
 // """""""""" insert partners """"""""""""""
 const insertPartners = async (req, res) => {
-    let { name } = req.body;
+    let result = await cloudinary.uploader.upload(req.file.path);
+    let  name  = req.body.name;
         try {
             await Partner.findOne({name})
             .then(partner =>{
@@ -12,7 +14,8 @@ const insertPartners = async (req, res) => {
                 else{
                     const newPartner = new Partner({
                         name: name,
-                        logo: req.file.path
+                        logo: result.secure_url,
+                        cloud: result.public_id
                     });
             
                     const savePartner = newPartner.save();
@@ -66,10 +69,11 @@ const deleteOnePartner = async (req, res) => {
 // """""""""" update one partner by his id""""""""""""""
 
 const updateOnePartner = async (req, res) => {
+    let result = await cloudinary.uploader.upload(req.file.path);
     try {
         const newPartnerData = {
             name: req.name,
-            logo: req.file.path
+            logo: result.secure_url
         };
 
         const partnerUpdated = Partner.findByIdAndUpdate({_id:req.params.id}, newPartnerData, {new: true});

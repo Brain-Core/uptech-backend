@@ -8,6 +8,9 @@ const PartnerSchema = mongoose.Schema({
     logo:{
         type: String,
         required: true
+    },
+    cloud: {
+        type: String
     }
 });
 
