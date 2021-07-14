@@ -1,5 +1,6 @@
 
 import TeamModel from '../models/team.model';
+import cloudinary from '../helper/cloudinary';
 
 
 // get all team members 
@@ -19,14 +20,14 @@ const getOneTeamMember = async (req,res)=>{
 }
 
 // ++++++++++++++++++++ register team member in the database ++++++++++++++++++++++
-const insertTeamMembers = (req,res) =>{
+const insertTeamMembers = async (req,res) =>{
     const { completeName, address, email, phone,position} = req.body;
-    const p = req.file.path
-    const avatar = p.substring(68);
+    const url = req.file.path;
+    let result = await cloudinary.uploader.upload(url);
 
     //validation, check if all fieal are filled
 
-    if(!completeName || !address || !email || !phone || !position || !avatar) return res.status(501).json(
+    if(!completeName || !address || !email || !phone || !position || !url) return res.status(501).json(
         {
             Warning: 'All fields must be fill'
         }
@@ -37,7 +38,16 @@ const insertTeamMembers = (req,res) =>{
         if(team){
             return res.json({msg: 'team member already exists'})
         }else{
-            let newMember = new TeamModel({completeName, address,email,phone,position,avatar});
+            let newMember = new TeamModel(
+                {
+                completeName, 
+                address,
+                email,
+                phone,
+                position,
+                avatar: result.secure_url, 
+                cloudi_id: result.public_id
+            });
             return newMember.save()
             .then(team=> {
                 res.json(team)
@@ -53,12 +63,12 @@ const insertTeamMembers = (req,res) =>{
 
 
 // ++++++++++++++++++++ update one team member in the database ++++++++++++++++++++++
-const updateTeamMember = (req, res) => {
+const updateTeamMember = async (req, res) => {
     const { completeName, address, email, phone,position} = req.body;
-    const p = req.file.path
-    const avatar = p.substring(68);
+    const url = req.file.path
+    const result = await cloudinary.uploader.upload(url);
     const id = req.params.id;
-    const upfield = {completeName, address, email, phone,position,avatar};
+    const upfield = {completeName, address, email, phone,position,avatar: result.secure_url};
 
     TeamModel.findByIdAndUpdate({_id:id}, upfield, {new: true})
     .then(team => res.json({

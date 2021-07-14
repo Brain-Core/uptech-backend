@@ -24,6 +24,9 @@ const TeamSchema = mongoose.Schema({
     avatar:{
         type: String,
         required: true
+    },
+    cloudi_id:{
+        type: String
     }
 });
 
