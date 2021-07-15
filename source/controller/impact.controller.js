@@ -1,4 +1,5 @@
 import impactModel from "../models/impact.model";
+import cloudinary from '../helper/cloudinary';
 
 
 // get impacts
@@ -16,11 +17,12 @@ const getOneImpact = (req, res) => {
 }
 
 
-const insertImpact = (req, res) => {
+const insertImpact = async (req, res) => {
     const { title , description } = req.body;
     const p = req.file.path;
-    const photo = p.substring(68);
-    if(!title || !description || !photo) return res.status(501).json({Warning: 'please fill all fields !!'});
+    const result = await cloudinary.uploader.upload(p);
+   
+    if(!title || !description || !p) return res.status(501).json({Warning: 'please fill all fields !!'});
 
         impactModel.findOne({title})
         .then(impact => {
@@ -31,7 +33,8 @@ const insertImpact = (req, res) => {
                 const newImpact = new impactModel({
                     title,
                     description,
-                    photo
+                    photo: result.secure_url,
+                    cloud_id: result.public_id
                 });
                 return newImpact.save()
                 .then(impact => res.json(impact))
@@ -47,12 +50,12 @@ const insertImpact = (req, res) => {
 const updateImpact = async (req, res) => {
     const { title , description } = req.body;
     const p = req.file.path;
-    const photo = p.substring(68);
+    const result = await cloudinary.uploader.upload(p);
     try {
         const newImpactData = {
             title,
             description,
-            photo
+            photo: result.secure_url
         };
 
         const impactUpdated = impactModel.findByIdAndUpdate({_id:req.params.id}, newImpactData, {new: true});
