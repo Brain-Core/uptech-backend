@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node source/app.js --exec babel-node -e js",
-    "dev": "nodemon source/app.js --exec babel-node -e js"
+    "server": "nodemon source/app.js --exec babel-node -e js",
+    "client":"npm start --prefix admin",
+    "devStart": "concurrently \"npm run server\" \" npm run client\""
   },
   "keywords": [
     "es6",
@@ -24,6 +26,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cloudinary": "^1.26.2",
+    "concurrently": "^6.2.0",
     "config": "^3.3.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
