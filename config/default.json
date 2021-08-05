@@ -1,4 +1,7 @@
 {
     "uri": "mongodb://127.0.0.1:27017/uptechdb",
-    "secret-key": "uptech_secret_key"
+    "secret-key": "uptech_secret_key",
+    "cloud_name":"dnzidlufh",
+    "API_KEY":"616215781361923",
+    "API_SECRET":"IAG2UBZmzoCr5UgPjNKnWJbzO9g"
 }
