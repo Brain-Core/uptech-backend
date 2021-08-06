@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node source/app.js --exec babel-node -e js",
     "server": "nodemon source/app.js --exec babel-node -e js",
-    "client":"npm start --prefix admin",
+    "client":"npm start --prefix client",
     "devStart": "concurrently \"npm run server\" \" npm run client\""
   },
   "keywords": [
