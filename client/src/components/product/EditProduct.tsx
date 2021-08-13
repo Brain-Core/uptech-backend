@@ -28,20 +28,30 @@ function EditProduct(props:any) {
 
     const editProduct = (e:any) => {
         e.preventDefault()
-        // const format = new FormData();
-        // format.append('namep',name);
-        // format.append("photo", photo);
-        // axios.put(`http://localhost:3030/products/edit/${_id}`,format)
-        // .then(res => console.log(res.data))
-        // // edit(format,_id);
-        // history.push('/');
+        const format = new FormData();
+        format.append('namep',name);
+        format.append("photo", photo);
+        axios.put(`http://localhost:3030/products/edit/${_id}`,format)
+        .then(res => console.log(res.data))
+        // edit(format,_id);
+        history.push('/');
         console.log(name)
     }
 
 
     return (
         <div className="container mt-4">
-            <h4> Edit Product</h4>
+            <h4> Edit </h4>
+            <div className="d-flex mb-4 float-right center">
+                <h5>{data?.namep}</h5>
+                <img 
+                src={data?.photo} 
+                className="rounded-circle" 
+                width='100' 
+                height='100' 
+                alt="" />
+            </div>
+            
             <form onSubmit={editProduct} className="form">
                 <div className="form-group">
                     <input 

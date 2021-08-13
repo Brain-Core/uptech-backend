@@ -41,7 +41,7 @@ export const productApi = createApi({
           },
           invalidatesTags:[{type: 'IProduct', id:'LIST'}]
         }),
-        editProduct: build.mutation<IProdcut,FormData & Pick<IProdcut,'_id'> >({
+        editProduct: build.mutation<IProdcut,FormData & Pick<IProdcut,"_id"> >({
           query({_id,...body}){
         
             return{
@@ -59,7 +59,7 @@ export const productApi = createApi({
               method:'DELETE'
             }
           },
-          invalidatesTags: (result, error, id) => [{ type: 'IProduct', id }],
+          invalidatesTags:['IProduct']
         })
     })
 });

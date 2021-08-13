@@ -13,7 +13,7 @@ function NavBar() {
                             <Link to='/' className="nav-link " >Product</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to='#' className="nav-link">Partner</Link>
+                            <Link to='/partner' className="nav-link">Partner</Link>
                         </li>
                         <li className="nav-item">
                             <Link to='#' className="nav-link">Team</Link> 

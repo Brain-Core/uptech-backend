@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom';
-import { useGetProductQuery } from '../../slices/productSlice';
+import { useGetProductQuery,useDeleteProductMutation } from '../../slices/productSlice';
 
 function Product() {
     const { data=[] } = useGetProductQuery();
+    const [deleteProduct] = useDeleteProductMutation();
+
+    const deleteOne = (id:any) => {
+        deleteProduct(id);
+    }
 
     return (
         <div className='m-4'>
@@ -25,7 +30,7 @@ function Product() {
                             <td>{product.namep}</td>
                             <td> <img width='30' className="rounded-circle" height='30' src={product.photo} alt="" /> </td>
                             <td><Link to={`/edit/${product._id}`} className="btn btn-outline-warning">edit</Link></td>
-                            <td><button className="btn btn-outline-danger">delete</button></td>
+                            <td><button onClick={()=>deleteOne(product._id)} className="btn btn-outline-danger">delete</button></td>
                         </tr>
                     ))}
                 </tbody>
