@@ -24,7 +24,7 @@ function Product() {
                             <th>{i+1}</th>
                             <td>{product.namep}</td>
                             <td> <img width='30' className="rounded-circle" height='30' src={product.photo} alt="" /> </td>
-                            <td><button className="btn btn-outline-warning">edit</button></td>
+                            <td><Link to={`/edit/${product._id}`} className="btn btn-outline-warning">edit</Link></td>
                             <td><button className="btn btn-outline-danger">delete</button></td>
                         </tr>
                     ))}

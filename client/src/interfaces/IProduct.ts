@@ -1,5 +1,5 @@
 export interface IProdcut{
-    _id: string,
+    _id?: string,
     namep: string,
-    photo: string
+    photo?: string
 }

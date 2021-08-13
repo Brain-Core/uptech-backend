@@ -6,9 +6,9 @@ import cloudinary from '../helper/cloudinary';
 
 async function insertProduct(req, res){
    const  namep  = req.body.namep;
-   const image = req.file.path 
-
+   const image = req.file.path; 
     let result = await cloudinary.uploader.upload(image)
+   
    
      Product.findOne({namep})
         .then(product =>{
@@ -63,10 +63,14 @@ const getOneProduct = async (req, res) => {
 // ############## edit one single product by its id #######
 
 const updateProduct = async (req, res) => {
-    let result = await cloudinary.uploader.upload(req.file.path)
+     
     try {
+        const name = req.body.namep;
+        const image = req.file.path;
+        let result = await cloudinary.uploader.upload(image);
+
         const newProductData = {
-            name: req.name,
+            name,
             photo: result.secure_url
         };
 

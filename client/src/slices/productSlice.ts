@@ -41,9 +41,9 @@ export const productApi = createApi({
           },
           invalidatesTags:[{type: 'IProduct', id:'LIST'}]
         }),
-        editProduct: build.mutation<IProdcut, Partial<IProdcut>>({
-          query(data){
-            const {_id, ...body } = data;
+        editProduct: build.mutation<IProdcut,FormData & Pick<IProdcut,'_id'> >({
+          query({_id,...body}){
+        
             return{
               url: `products/edit/${_id}`,
               method:'PUT',
@@ -52,7 +52,7 @@ export const productApi = createApi({
           },
           invalidatesTags:[{type: 'IProduct', id:'LIST'}]
         }),
-        deleteProduct: build.mutation<{success:boolean; _id:string}, number>({
+        deleteProduct: build.mutation<{success:boolean; _id:string}, string>({
           query(_id){
             return {
               url:`/products/delete/${_id}`,
