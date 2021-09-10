@@ -42,6 +42,16 @@ function Team() {
             editable: false,
         },
         {
+            field:'avatar',
+            headername: "Avatar",
+            width: 120,
+            renderCell: (params:any)=>(
+                <div>
+                    <img style={{ borderRadius:'50%'}} src={params.row.avatar} width={50} height={50}/>
+                </div>
+            )
+        },
+        {
             field:'',
             headerName:'*',
             renderCell:(params:any)=>(

@@ -35,7 +35,11 @@ const insertPartners = async (req, res) => {
 const getPartners = async (req, res) => {
     try {
         const partners = await Partner.find();
-        return res.json(partners);
+        let returnPartner = [];
+        for (let i = 0; i < partners.length; i++){
+            returnPartner.push(partners[i].transform())
+        }
+        return res.json(returnPartner);
         
     } catch (error) {
         return res.json({errorMessage: error});

@@ -6,7 +6,14 @@ import cloudinary from '../helper/cloudinary';
 // get all team members 
 const getTeamMember = async (req,res)=>{
     await TeamModel.find()
-    .then(teams => res.json(teams))
+    .then(teams => {
+        let returnTeam = [];
+        for(let i=0; i < teams.length; i++) {
+            returnTeam.push(teams[i].transform())
+        }
+        res.json(returnTeam)
+
+    })
     .catch(err=> res.json({MsgError: err}))
 }
 
@@ -69,7 +76,7 @@ const updateTeamMember = async (req, res) => {
     const id = req.params.id;
     const upfield = {completeName, address, email, phone,position,avatar: result.secure_url};
 
-    const teamUpdate = await TeamModel.findByIdAndUpdate({_id:id}, upfield, {new: true})
+    const teamUpdate = await TeamModel.findByIdAndUpdate({id:id}, upfield, {new: true})
     return res.json({
         completeName: teamUpdate.completeName
     })
@@ -82,7 +89,7 @@ const updateTeamMember = async (req, res) => {
 
 const deleteTeamMember = (req, res) => {
     const id = req.params.id;
-    TeamModel.findByIdAndDelete({_id:id})
+    TeamModel.findByIdAndDelete({id:id})
     .then(team => res.json({
         team: {
             id: team.id,

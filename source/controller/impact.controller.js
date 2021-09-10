@@ -5,7 +5,14 @@ import cloudinary from '../helper/cloudinary';
 // get impacts
 const getImpact = (req, res) => {
    impactModel.find()
-   .then(impacts => res.json(impacts))
+   .then(impacts => {
+       let returnImpact = [];
+       for (let i = 0; i < impacts.length; i++) {
+           returnImpact.push(impacts[i].transform())
+       }
+
+       res.json(returnImpact)
+    })
    .catch(err=> res.json({errorMessage: error}));
 }
 

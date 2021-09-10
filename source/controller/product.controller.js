@@ -38,7 +38,11 @@ async function insertProduct(req, res){
 const getProducts = async (req, res) => {
     try {
         const products = await Product.find();
-        return res.json(products);
+        let returnProduct = [];
+        for (let i = 0; i < products.length; i++) {
+            returnProduct.push(products[i].transform())
+        }
+        return res.json(returnProduct);
         
     } catch (error) {
         return res.json({errorMessage: error});

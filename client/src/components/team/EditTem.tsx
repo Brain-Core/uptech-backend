@@ -1,6 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
+
+
 
 function EditTem() {
+    const history = useHistory();
+    const {id}: {id:string} = useParams();
+
+ 
+
     return (
         <div className="other">
             <div className="p-4">

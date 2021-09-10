@@ -14,4 +14,15 @@ const PartnerSchema = mongoose.Schema({
     }
 });
 
+
+PartnerSchema.method('transform', function() {
+    let obj = this.toObject();
+
+    //Rename fields
+    obj.id = obj._id;
+    delete obj._id;
+
+    return obj;
+});
+
 export default mongoose.model('partners', PartnerSchema);
