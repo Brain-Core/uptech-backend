@@ -1,0 +1,12 @@
+.container1{
+    display: flex;
+}
+
+.other{
+    flex: 4;
+}
+
+.icon-delete{
+    color: brown;
+    cursor: pointer;
+}
