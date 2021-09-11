@@ -365,7 +365,7 @@
                 }
             }
         },
-        "/impacts/edit/{id}":{
+        "/impacts/put/{id}":{
             "parameters": [
                 {
                     "name": "id",

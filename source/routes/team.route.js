@@ -28,6 +28,7 @@ route.post('/post', upload.single('avatar'),controller.insertTeamMembers);
 // @access public
 route.put('/edit/:id', upload.single('avatar'), controller.updateTeamMember)
 
+
 // router /teams/delete/:id
 // @desc delete
 // @access public

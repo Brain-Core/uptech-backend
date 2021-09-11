@@ -26,7 +26,7 @@ app.use('/partners', partnersRoute);
 app.use('/teams',teamRoute)
 
 //impacts
-app.use('/impact', impactRoute)
+app.use('/impacts', impactRoute)
 
 //banner routes
 app.use('/banner', bannerRoute);

@@ -6,7 +6,14 @@ import cloudinary from '../helper/cloudinary';
 // get all team members 
 const getTeamMember = async (req,res)=>{
     await TeamModel.find()
-    .then(teams => res.json(teams))
+    .then(teams => {
+        let returnTeam = [];
+        for(let i=0; i < teams.length; i++) {
+            returnTeam.push(teams[i].transform())
+        }
+        res.json(returnTeam)
+
+    })
     .catch(err=> res.json({MsgError: err}))
 }
 
@@ -38,7 +45,7 @@ const insertTeamMembers = async (req,res) =>{
         if(team){
             return res.json({msg: 'team member already exists'})
         }else{
-            let newMember = new TeamModel(
+            let newTeam = new TeamModel(
                 {
                 completeName, 
                 address,
@@ -48,11 +55,10 @@ const insertTeamMembers = async (req,res) =>{
                 avatar: result.secure_url, 
                 cloudi_id: result.public_id
             });
-            return newMember.save()
-            .then(team=> {
-                res.json(team)
-            })
-            .catch(err => res.json({MsgError: err}));
+            newTeam.save()
+            .then(team => res.json(team))
+            
+            
         }
     })
     .catch();
@@ -70,14 +76,10 @@ const updateTeamMember = async (req, res) => {
     const id = req.params.id;
     const upfield = {completeName, address, email, phone,position,avatar: result.secure_url};
 
-    TeamModel.findByIdAndUpdate({_id:id}, upfield, {new: true})
-    .then(team => res.json({
-        team:{
-            id: team.id,
-            completeName: team.completeName
-        }
-    }))
-    .catch(err => res.json({MsgError: err}));
+    const teamUpdate = await TeamModel.findByIdAndUpdate({id:id}, upfield, {new: true})
+    return res.json({
+        completeName: teamUpdate.completeName
+    })
 
 }
 
@@ -87,7 +89,7 @@ const updateTeamMember = async (req, res) => {
 
 const deleteTeamMember = (req, res) => {
     const id = req.params.id;
-    TeamModel.findByIdAndDelete({_id:id})
+    TeamModel.findByIdAndDelete({id:id})
     .then(team => res.json({
         team: {
             id: team.id,

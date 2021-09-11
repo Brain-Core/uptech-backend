@@ -35,7 +35,11 @@ const insertPartners = async (req, res) => {
 const getPartners = async (req, res) => {
     try {
         const partners = await Partner.find();
-        return res.json(partners);
+        let returnPartner = [];
+        for (let i = 0; i < partners.length; i++){
+            returnPartner.push(partners[i].transform())
+        }
+        return res.json(returnPartner);
         
     } catch (error) {
         return res.json({errorMessage: error});
@@ -69,20 +73,23 @@ const deleteOnePartner = async (req, res) => {
 // """""""""" update one partner by his id""""""""""""""
 
 const updateOnePartner = async (req, res) => {
-    let result = await cloudinary.uploader.upload(req.file.path);
+    const name = req.body.name;
+    const image = req.file.path;
+    console.log(name," - ",image)
+    let result = await cloudinary.uploader.upload(image);
     try {
         const newPartnerData = {
-            name: req.name,
+            name,
             logo: result.secure_url
         };
 
-        const partnerUpdated = Partner.findByIdAndUpdate({_id:req.params.id}, newPartnerData, {new: true});
+        const partnerUpdated = await Partner.findByIdAndUpdate({_id:req.params.id}, newPartnerData, {new: true});
         return res.json(partnerUpdated);
         
     } catch (error) {
         return res.json({errorMessage: error});
     }
-}
+ }
 
 
 
