@@ -8,7 +8,8 @@ function SideBar() {
             <div className="mt-4 menu">
                 <Link to="/" className="btn btn-primary rounded m-2">Team</Link>
                 <Link to="/product" className="btn btn-primary rounded m-2">Product</Link>
-                <Link to="/partner" className="btn btn-primary rounded m-2">Partners</Link>
+                <Link to="/partner" className="btn btn-primary rounded m-2">Partner</Link>
+                <Link to="/impact" className="btn btn-primary rounded m-2">Impact</Link>
             </div>
         </div>
     )

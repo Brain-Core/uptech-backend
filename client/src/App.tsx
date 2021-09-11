@@ -11,6 +11,9 @@ import EditProduct from './components/product/EditProduct';
 import AddProduct from './components/product/AddProduct';
 import EditPartner from './components/partner/EditPartner';
 import AddPartner from './components/partner/AddPartner';
+import Impact from './components/impact/Impact';
+import EditImpact from './components/impact/EditImpact';
+import AddImpact from './components/impact/AddImpact';
 
 
 function App() {
@@ -32,6 +35,11 @@ function App() {
         <Route exact path='/partner' component={Partner}/>
         <Route exact path='/editpartner/:id' component={EditPartner}/>
         <Route exact path='/addpartner' component={AddPartner}/>
+
+        {/* impact's routes */}
+        <Route exact path='/impact' component={Impact}/>
+        <Route exact path='/addimpact' component={AddImpact}/>
+        <Route exact path='/editimpact/:id' component={EditImpact}/>
 
 
       </div>
