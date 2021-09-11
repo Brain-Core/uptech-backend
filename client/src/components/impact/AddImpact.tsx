@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useAddImpactMutation } from '../../slices/impactSlice';
 import { useState } from 'react';
 
@@ -7,19 +7,33 @@ function AddImpact() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [photo, setPhoto] = useState('');
+    const history = useHistory();
+
+    const [addImpact] = useAddImpactMutation();
 
     // handle onchange
     const onChangeTitle = (e:any) => setTitle(e.target.value);
     const onChangeDescription = (e:any) => setDescription(e.target.value);
     const onChangePhoto = (e:any) => setPhoto(e.target.files[0])
 
+    const onSubmit = (e:any) => {
+        e.preventDefault();
+        const format = new FormData();
+        format.append('title', title);
+        format.append('description', description);
+        format.append('photo', photo);
+        addImpact(format);
+        setTitle('');
+        setDescription('');
+        history.push('/impact')
+    }
 
     return (
         <div className="other">
             <div className="p-4">
                 <h3 className="font-weight-bold text-center">New Impact</h3>
                 <div className="card p-2">
-                    <form className="form">
+                    <form onSubmit={onSubmit} className="form">
                         <div className="form-group">
                             <input
                             className="form-control"
