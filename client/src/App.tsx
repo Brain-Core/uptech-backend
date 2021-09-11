@@ -9,6 +9,8 @@ import Addteam from './components/team/Addteam';
 import EditTem from './components/team/EditTem';
 import EditProduct from './components/product/EditProduct';
 import AddProduct from './components/product/AddProduct';
+import EditPartner from './components/partner/EditPartner';
+import AddPartner from './components/partner/AddPartner';
 
 
 function App() {
@@ -28,6 +30,9 @@ function App() {
 
         {/* partner's routes */}
         <Route exact path='/partner' component={Partner}/>
+        <Route exact path='/editpartner/:id' component={EditPartner}/>
+        <Route exact path='/addpartner' component={AddPartner}/>
+
 
       </div>
     </Router>
