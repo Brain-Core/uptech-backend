@@ -1,7 +1,7 @@
 {
-    "uri": "mongodb://127.0.0.1:27017/uptechdb",
+    "uri": "mongodb+srv://uptech-user-pass:Pass-User-Uptech@uptech-agro.pow4n.mongodb.net/uptech?retryWrites=true&w=majority",
     "secret-key": "uptech_secret_key",
-    "cloud_name":"dnzidlufh",
-    "API_KEY":"616215781361923",
-    "API_SECRET":"IAG2UBZmzoCr5UgPjNKnWJbzO9g"
+    "cloud_name":"uptech-agro-com",
+    "API_KEY":"713769485942222",
+    "API_SECRET":"OLcwahLdEpAc8ugYJAb_zTbftrM"
 }
