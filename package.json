@@ -4,7 +4,7 @@
   "description": "up-tech backend stuff",
   "main": "app.js",
   "scripts": {
-    "start": "babel-node source/app.js ",
+    "start": "babel-node source/app.js",
     "server": "nodemon source/app.js --exec babel-node -e js",
     "client": "npm start --prefix client",
     "devStart": "concurrently \"npm run server\" \" npm run client\""
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/Brain-Core/uptech-backend#readme",
   "dependencies": {
-    "babel-node": "0.0.1-security",
+    "babel-node": "^0.0.1-security",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.26.2",
     "concurrently": "^6.2.0",
