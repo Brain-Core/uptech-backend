@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node source/app.js --exec babel-node -e js",
     "server": "nodemon source/app.js --exec babel-node -e js",
-    "client":"npm start --prefix client",
+    "client": "npm start --prefix client",
     "devStart": "concurrently \"npm run server\" \" npm run client\""
   },
   "keywords": [
@@ -40,5 +40,8 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
     "nodemon": "^2.0.7"
+  },
+  "engines": {
+    "node": "14.17.1"
   }
 }
