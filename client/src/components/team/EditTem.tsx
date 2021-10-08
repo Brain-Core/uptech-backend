@@ -50,7 +50,7 @@ function EditTem() {
         history.push('/')
     }
 
-
+    // eslint-disable-next-line
     return (
         <div className="other">
             <div className="p-4">

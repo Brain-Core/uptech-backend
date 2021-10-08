@@ -4,10 +4,14 @@
   "description": "up-tech backend stuff",
   "main": "app.js",
   "scripts": {
-    "start": "babel-node source/app.js",
+    "start": "node build/app.js",
     "server": "nodemon source/app.js --exec babel-node -e js",
     "client": "npm start --prefix client",
-    "devStart": "concurrently \"npm run server\" \" npm run client\""
+    "devStart": "concurrently \"npm run server\" \" npm run client\"",
+    "clean":"rm -rf build && mkdir build",
+    "build-babel":"babel -d ./build ./source -s",
+    "build":"npm run clean && npm run build-babel",
+    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [
     "es6",
@@ -30,6 +34,7 @@
     "concurrently": "^6.2.0",
     "config": "^3.3.6",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.11.18",
     "multer": "^1.4.2",
