@@ -33,7 +33,7 @@ UserModel.method('transform', function() {
 });
 
 
-
+// hashing password before saving it to the data base
 UserModel.pre('save', async function(next){
     if(!this.isModified("password")){
         next();
@@ -42,6 +42,8 @@ UserModel.pre('save', async function(next){
     const salt = await genSalt(10);
     this.password = await hash(this.password, salt)
 });
+
+// generating token
 
 UserModel.methods.getSignToken = async function(){
     return sign({id: this._id}, process.env.access_token, {expiresIn:"15d"})
