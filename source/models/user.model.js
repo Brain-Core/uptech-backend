@@ -1,4 +1,6 @@
 import mongoose from '../helper/dbconnect';
+import { hash, genSalt } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
 
 const UserModel = new mongoose.Schema({
     name: {
@@ -29,6 +31,22 @@ UserModel.method('transform', function() {
 
     return obj;
 });
+
+
+
+UserModel.pre('save', async function(next){
+    if(!this.isModified("password")){
+        next();
+    }
+
+    const salt = await genSalt(10);
+    this.password = await hash(this.password, salt)
+});
+
+UserModel.methods.getSignToken = async function(){
+    return sign({id: this._id}, process.env.access_token, {expiresIn:"15d"})
+}
+
 
 
 export default mongoose.model("user", UserModel);
