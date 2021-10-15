@@ -1,6 +1,8 @@
 import User from '../models/user.model';
 import { compare  } from 'bcryptjs';
-
+import { sign } from 'jsonwebtoken';
+import 'dotenv/config';
+import ErrorResponse from '../helper/error';
 
 export async function register(req, res, next){
     const { name, email, password} = req.body;
@@ -12,10 +14,10 @@ export async function register(req, res, next){
 
         res.status(201).json({
             success: true,
-            accessToken: User.getSignToken()
+            accessToken: sign({id: user._id}, process.env.access_token, {expiresIn:"15d"})
         })
     } catch (error) {
-        next(error);
+        next(error)
     }
 
 }
@@ -24,20 +26,20 @@ export async function register(req, res, next){
 
 export async function login(req, res, next){
     const { email, password } = req.body;
-    if(!email || !password) return res.status(401).json("please provider email and password");
+    if(!email || !password) return next(new ErrorResponse("please provider email and password",404));
 
     try {
         const user = await await User.findOne({ email}).select("+password");
 
-        if(!user) return res.status(404).json("user does not exist");
+        if(!user) return next(new ErrorResponse("user does not exist",404));
 
-        const isMatch = compare(password, user.password);
+        const isMatch = await compare(password, user.password);
 
-        if(!isMatch) return res.status(400),json("invalid password!!");
+        if(!isMatch) return next(new ErrorResponse("invalid password!!",400));
 
-        res.status(201).json({
+        res.status(200).json({
             success: true,
-            accessToken: User.getSignToken()
+            accessToken: sign({id: user._id}, process.env.access_token, {expiresIn:"15d"})
         })
 
     } catch (error) {
