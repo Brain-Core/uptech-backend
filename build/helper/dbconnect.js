@@ -1,16 +1,11 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
 var _mongoose = require("mongoose");
 
-var _mongoose2 = _interopRequireDefault(_mongoose);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_mongoose2.default.connect(process.env.uri, {
+
+_mongoose.connect(process.env.uri, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -21,5 +16,5 @@ _mongoose2.default.connect(process.env.uri, {
     return console.log(err);
 });
 
-exports.default = _mongoose2.default;
+exports.default = _mongoose;
 //# sourceMappingURL=dbconnect.js.map

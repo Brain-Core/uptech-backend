@@ -3,6 +3,7 @@ import swaggerUi from 'swagger-ui-express';
 import 'dotenv/config';
 import productRoute from './routes/product.route';
 import partnersRoute from './routes/partner.route';
+import authRoute from './routes/user.route';
 import teamRoute from './routes/team.route';
 import bannerRoute from './routes/banner.route';
 import cors from 'cors'
@@ -46,6 +47,9 @@ app.use('/impacts', impactRoute)
 
 //banner routes
 app.use('/banner', bannerRoute);
+
+//auth
+app.use('/auth', authRoute);
 
 // docs 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));

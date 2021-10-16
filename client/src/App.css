@@ -10,3 +10,11 @@
     color: brown;
     cursor: pointer;
 }
+
+
+.error-handle{
+    color: #a32e1c;
+    text-align: center;
+    background-color: #ffbab0;
+    padding: 10px;
+}
