@@ -22,15 +22,7 @@ const UserModel = new mongoose.Schema({
 })
 
 
-UserModel.method('transform', function() {
-    let obj = this.toObject();
 
-    //Rename fields
-    obj.id = obj._id;
-    delete obj._id;
-
-    return obj;
-});
 
 
 // hashing password before saving it to the data base
@@ -43,11 +35,17 @@ UserModel.pre('save', async function(next){
     this.password = await hash(this.password, salt)
 });
 
-// generating token
 
-UserModel.methods.getSignToken = async function(){
-    return sign({id: this._id}, process.env.access_token, {expiresIn:"15d"})
-}
+
+UserModel.method('transform', function() {
+    let obj = this.toObject();
+
+    //Rename fields
+    obj.id = obj._id;
+    delete obj._id;
+
+    return obj;
+});
 
 
 
