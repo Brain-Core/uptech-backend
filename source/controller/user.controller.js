@@ -14,7 +14,6 @@ export async function register(req, res, next){
 
         res.status(201).json({
             success: true,
-            accessToken: sign({id: user._id}, process.env.access_token, {expiresIn:"15d"})
         })
     } catch (error) {
         next(error)
